@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="tablero.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="enRaya.js"></script>
+    </head>
+<body onload="enRaya();">
+
+    <div id="titulo" class="bloque-pantalla">tres en raya</div>
+
+    <div id="muestra-jugadores" class="bloque-pantalla">
+        <table id="tabla-jugadores" class="bloque-pantalla">
+            <tr>
+                <td id="jugadores1">Jugador1 : <span id="jugador1"></span> <span id="signo-jugador1"></span></td>
+                <td id="jugadores2">Jugador2 : <span id="jugador2"></span> <span id="signo-jugador2"></span></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="turno" class="bloque-pantalla">
+        <div id="textoturno">juega con </div><div id="signo"> O </div><div id="jugador">javi</div>
+    </div>
+
+    <div id="start" class="bloque-pantalla">
+        <span id="start-element">empezar</span>
+    </div>
+
+
+    <div id="datos" class="bloque-pantalla">
+        <div id="pedirdatos">
+            <div id="textopedir"></div>
+            <div id="dato">
+                <form>
+                    nombre
+                    <input id="valordato" type="text" name="dato">
+                    <p id="botonaceptar"">aceptar</p>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    <div id="contenedortablero">
+        <table id="tablero" border="1">
+            <tbody id="cuerpotablero">
+                <tr>
+                    <td id="0" class="celda"></td>
+                    <td id="1" class="celda"></td>
+                    <td id="2" class="celda"></td>
+                </tr>
+                <tr>
+                    <td id="3" class="celda"></td>
+                    <td id="4" class="celda"></td>
+                    <td id="5" class="celda"></td>
+                </tr>
+                <tr>
+                    <td id="6" class="celda"></td>
+                    <td id="7" class="celda"></td>
+                    <td id="8"class="celda"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="ganador">
+        <div id="textoganador">el ganador</div>
+    </div>
+
+
+</body>
+
+</html>
