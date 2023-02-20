@@ -1,18 +1,9 @@
 
-/*
-let fila = [` `,` `,` `];
-let tablero = [fila, fila, fila];
-let fila0 = [tablero[0][0],tablero[0][1],tablero[0][2]];
-let fila1 = [tablero[1][0],tablero[1][1],tablero[1][2]];
-let fila2 = [tablero[2][0],tablero[2][1],tablero[2][2]];
-let columna0 = [tablero[0][0],tablero[1][0],tablero[2][0]];
-let columna1 = [tablero[0][1],tablero[1][1],tablero[2][1]];
-let columna2 = [tablero[0][2],tablero[1][2],tablero[2][2]];
-let cruz1 = [tablero[0][0],tablero[1][1],tablero[2][2]];
-let cruz2 = [tablero[0][2],tablero[1][1],tablero[2][0]];
-*/
+const circle = `circle`;
+const cross = `cross`;
+const vacio = 'vacio';
 
-let tablero = ['','','O','','','','','',''];
+let tablero = [vacio,vacio,vacio,vacio,vacio,circle,cross,vacio,vacio];
 let fila0 =    [tablero[0],tablero[1],tablero[2]];
 let fila1 =    [tablero[3],tablero[4],tablero[5]];
 let fila2 =    [tablero[6],tablero[7],tablero[8]];
@@ -21,21 +12,32 @@ let columna1 = [tablero[1],tablero[4],tablero[7]];
 let columna2 = [tablero[2],tablero[5],tablero[8]];
 let cruz1 =    [tablero[0],tablero[4],tablero[8]];
 let cruz2 =    [tablero[2],tablero[4],tablero[6]];
+let noplayer = {'nombrejugador':'', 'signo':''}; 
 let player1 = {'nombrejugador':'', 'signo':''};
 let player2 = {'nombrejugador':'', 'signo':''};
 let ganador = '';
-const circle = `O`;
-const cross = `X`;
+let sepuedecambiarturno = false;
+
+
+let turnojugador = noplayer;
 
 function contarsitres(combinacion, signo){
-    prueba = combinacion.filter(element => element == signo);
-    if (prueba.length == 3){
+    
+    gano = contarfichas(combinacion, signo);
+    
+    if (gano == 3){
         respuesta = true;
     }
     else{
         respuesta = false;
     }
+
     return respuesta;
+}
+
+function contarfichas(fichas, signo){
+    numerofichas = fichas.filter(element => element == signo);
+    return numerofichas.length;
 }
 
 function testsuccess(signo){
@@ -68,85 +70,76 @@ function testsuccess(signo){
 
 }
 
-function setjugador1(){
-    player1['nombrejugador']=$("#valordato").val();
-    player1['signo']=circle;
-    $("#jugador1").html(player1['nombrejugador']);
-    $("#signo-jugador1").html(player1['signo']);
-    $("#valordato").val('');
-    $("#botonaceptar").on('click',false);
-    //pedirdatos2();
+
+
+function iniciardebug(){
+
+   //debug
+    player1['nombrejugador'] = 'javi';
+    player1['signo'] = circle;
+    player2['nombrejugador'] = 'lolo';
+    player2['signo'] = cross;
+    mostrarjugador('jugador1', player1['nombrejugador'], player1['signo']);
+    mostrarjugador('jugador2', player2['nombrejugador'], player2['signo']);  
+   //debug
+   
 }
 
-function setjugador2(){
-    player2['nombrejugador']=$("#valordato").val();
-    player2['signo']=cross;
-    $("#jugador2").html(player2['nombrejugador']);
-    $("#signo-jugador2").html(player2['signo']);
-    $("#valordato").val('');
-    $("#botonaceptar").on('click',false);
-    $("#datos").attr('style','display:none');
-}
 
-function pedirdatos1(){
-    
-    $("#start").attr('style','display:none');
-    $("#datos").attr('style','display:block');
-    $("#start-element").on('click',false);
 
-    $("#textopedir").html("nombre jugador 1");
-    $("#botonaceptar").on('click',setjugador1);
-
-}
-
-function pedirdatos2(){
-    
-    $("#datos").attr('style','display:block');
-
-    $("#textopedir").html("nombre jugador 2");
-    $("#botonaceptar").on('click',setjugador2);
-
-}
-
-async function pedir(){
-
-    await pedirdatos1(); 
-    pedirdatos2();
-    
-}
-
-function pintartablero(){
-    for (i=0;i<9;i++){
-        $("#"+i).html(tablero[i]);
+function validarjugadores(){
+    if ( (player1['nombrejugador'] == '') 
+        || (player2['nombrejugador'] == '')) {
+        alert('faltan jugadores');
     }
+    else{
+        $("#start-element").attr('style','display:none');
+        $("#pedirjugadores").attr('style','display:none');
+        Game();
+    }
+
 }
 
-function initGame(){
-    $("#datos").attr('style','display:none');
-    $("#start").attr('style','display:block');
-    $("#start-element").on('click',pedir);
+function initGame(){  
 
+    $("#datos").attr('style','display:none');
+    $("#turno").attr('style','display:none');
+    $("#contenedortablero").attr('style','display:none');
+    $("#ganador").attr('style','display:none');
+
+    //$("#pedirjugadores").attr('style','display:block');
+
+    //debug para no pedir datos jugadores
+    iniciardebug();
+    $("#pedirjugadores").attr('style','display:none');
+    //debug
+
+    $("#start-element").on('click',validarjugadores);
 
 }
 
 function Game(){
-    
-    while (!(ganador == '')){
 
-        if (testsuccess(turno)){
 
+    pintarturno();
+    pintartablero();
+
+    let contador = 0;
+    while ((ganador == '')){
+
+        if (sepuedecambiarturno){
+           cambiarturno();
+           sepuedecambiarturno = false;
         }
+
+        contador++;
+        if (contador>3){
+            ganador = 'javi';
+        }
+
+
+
     }
 
 }
 
-function createtablero(){
-
-}
-
-function enRaya(){
-    
-    initGame();
-    pintartablero();
-    
-}

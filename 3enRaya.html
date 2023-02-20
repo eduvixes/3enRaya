@@ -5,8 +5,12 @@
         <link rel="stylesheet" href="tablero.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="enRaya.js"></script>
+        <script type="text/javascript" src="jugadores.js"></script>
+        <script type="text/javascript" src="viewfunctions.js"></script>
+
     </head>
-<body onload="enRaya();">
+<body onload="initGame();">
+    <!---<body onload="(async()=>{await initGame();iniciarjuego();})();">-->
 
     <div id="titulo" class="bloque-pantalla">tres en raya</div>
 
@@ -20,19 +24,23 @@
     </div>
 
     <div id="turno" class="bloque-pantalla">
-        <div id="textoturno">juega con </div><div id="signo"> O </div><div id="jugador">javi</div>
+        Juega <span id="jugador"></span> con <span id="signo"> </span>
     </div>
 
     <div id="start" class="bloque-pantalla">
         <span id="start-element">empezar</span>
     </div>
 
+    <div id="pedirjugadores" class="bloque-pantalla">
+        <spam id="pedirjugador1" onclick="pedirdatos1();">datos jugador 1</spam>
+        <span id="pedirjugador2" onclick="pedirdatos2();">datos jugador 2</span>
+    </div>
 
     <div id="datos" class="bloque-pantalla">
         <div id="pedirdatos">
             <div id="textopedir"></div>
             <div id="dato">
-                <form>
+                <form id="formdatos">
                     nombre
                     <input id="valordato" type="text" name="dato">
                     <p id="botonaceptar"">aceptar</p>
@@ -61,6 +69,7 @@
                 </tr>
             </tbody>
         </table>
+        <span id='cambiarturno' onclick='cambiarturno();'>cambiar</span>
     </div>
     <div id="ganador">
         <div id="textoganador">el ganador</div>
