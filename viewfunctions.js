@@ -1,6 +1,6 @@
-function mostrarjugador(id,nombre,signo){
-	$("#"+id).html(nombre);
-    $("#signo-"+id).html(signo);
+function mostrarjugador(nombre,signo){
+	$("#jugardor").html(nombre);
+    $("#signo").html(signo);
 }
 
 
@@ -15,9 +15,8 @@ function pintarturno(){
 		nombre = player2['nombrejugador'];
 		signo = player2['signo'];
 	}
-	$("#signo").html(signo);
-	$("#jugador").html(nombre);
 
+	mostrarjugador(nombre, signo);
 }
 
 function pintartablero(){
@@ -27,47 +26,48 @@ function pintartablero(){
 
     for (i=0;i<9;i++){
 
-    	switch (tablero[i]){
-    		case vacio:
-    			pintasigno(i);
-    			//vaciosdisponibles();
-    			break;
-    		case circle:
-    			pintasigno(i);
-    			break;
-    		case cross:
-    			pintasigno(i);
-    			break;
-    		default:
-    			break;
-    	}
+    	pintasigno(i);
 
     }
 
 }
 
-function cambiaficha(i){
-	tablero[i] = turnojugador['signo'];
-
-	//que se pueda cambiar turno HACER
-	sepuedecambiarturno = true;
-	//cambiarturno();
-	//
-
+function mostrarganador(jugador, posiciones){
+	//pintar posiciones ganador
+	alert(turnojugador['nombrejugador']);
 }
 
-function incluiraccion(i){
+function jugar(i){
 
-	$("#imagen"+i).on('click',cambiaficha(i));
+	if ((contarfichas(tablero, turnojugador['signo']) < 3)){
+		tablero[i] = turnojugador['signo'];
+		pintasigno(i);
+		rellenarcombinaciones();
+		res = testsuccess(turnojugador['signo']);
+		if (res == false){
+			cambiarturno();
+		}
+		else{
+			mostrarganador(turnojugador, res['posiciones']);
+		}
+	}
+	else{
+		if (tablero[i] == turnojugador['signo']){
+			tablero[i] = vacio;
+			pintasigno(i);
+			rellenarcombinaciones();
+		}
+	}
+
+
+
 }
 
 function pintasigno(i){
 
-	imagen = "<img id='imagen" + i +"' onclick='cambiaficha(i);' class = 'contenidocelda' src='./img/" + tablero[i] + ".png'" +">";
+	imagen = "<img id='imagen" + i +"' onclick='jugar("+i+");' class = 'contenidocelda' src='./img/" + tablero[i] + ".png'" +">";
 
 	$("#"+i).html(imagen);
-
-	incluiraccion(i);
 
 }
 
