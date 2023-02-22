@@ -50,15 +50,20 @@ function mostrarganador(jugador, posiciones){
 function jugar(i){
 
 	if ((contarfichas(tablero, turnojugador['signo']) < 3)){
-		tablero[i] = turnojugador['signo'];
-		pintasigno(i);
-		rellenarcombinaciones();
-		res = testsuccess(turnojugador['signo']);
-		if (res == false){
-			cambiarturno();
+		if (tablero[i] == vacio){	
+			tablero[i] = turnojugador['signo'];
+			pintasigno(i);
+			rellenarcombinaciones();
+			res = testsuccess(turnojugador['signo']);
+			if (res == false){
+				cambiarturno();
+			}
+			else{
+				mostrarganador(turnojugador, res['posiciones']);
+			}
 		}
 		else{
-			mostrarganador(turnojugador, res['posiciones']);
+			
 		}
 	}
 	else{
