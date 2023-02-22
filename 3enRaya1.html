@@ -2,19 +2,20 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="tablero.css">
+        <link rel="stylesheet" href="tablero1.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="enRaya.js"></script>
         <script type="text/javascript" src="jugadores.js"></script>
         <script type="text/javascript" src="viewfunctions.js"></script>
 
     </head>
+
 <body onload="initGame();">
 
-    <div id="titulo" class="bloque-pantalla">tres en raya</div>
+    <div id="titulo">TRES EN RAYA</div>
 
-    <div id="muestra-jugadores" class="bloque-pantalla">
-        <table id="tabla-jugadores" class="bloque-pantalla">
+    <div id="muestra-jugadores" >
+        <table id="tabla-jugadores" >
             <tr>
                 <td id="jugadores1">JUGADOR 1 : <span id="jugador1"></span> <img class="signo" src='./img/circle.png'></td>
                 <td id="jugadores2">JUGADOR 2 : <span id="jugador2"></span> <img class="signo" src='./img/cross.png'></td>
@@ -22,47 +23,49 @@
         </table>
     </div>
 
-    <div id="turno" class="bloque-pantalla">
-         Juega <span id="jugador">JUGADOR1</span> con <img id='signo' class="signo" src=''>
+    <div id="muestra-turno" >
+        <div id="turno">
+            Juega <span id="jugador">JUGADOR1</span> con <img id='signo' class="signo" src=''>
+        </div>
     </div>
-
-    <div id="datos" class="bloque-pantalla">
+ 
+    <div id="datos" style="display: none;">
         <form id="formdatos">
             Nombre Jugador 1: <input id="nombrejugador1" type="text" name="dato"><img class='signo' src='./img/circle.png'><br>
             Nombre Jugador 2: <input id="nombrejugador2" type="text" name="dato"><img class='signo' src='./img/cross.png'><br>
             <p id="botonaceptar">Aceptar</p>
         </form>
     </div>
-    
+
+  
     <div id="contenedortablero">
         <table id="tablero" border="1">
-            <tbody id="cuerpotablero">
+            <tbody>
                 <tr>
-                    <td id="0" class="celda"></td>
-                    <td id="1" class="celda"></td>
-                    <td id="2" class="celda"></td>
+                    <td id="0"></td>
+                    <td id="1"></td>
+                    <td id="2"></td>
                 </tr>
                 <tr>
-                    <td id="3" class="celda"></td>
-                    <td id="4" class="celda"></td>
-                    <td id="5" class="celda"></td>
+                    <td id="3"></td>
+                    <td id="4"></td>
+                    <td id="5"></td>
                 </tr>
                 <tr>
-                    <td id="6" class="celda"></td>
-                    <td id="7" class="celda"></td>
-                    <td id="8"class="celda"></td>
+                    <td id="6"></td>
+                    <td id="7"></td>
+                    <td id="8"></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
     <div id="ganador">
-        El ganador es <spam id="nombreganador"></span><br>
+        El ganador es <spam id="nombreganador">JUGADOR1</span><br>
     </div>
 
     <div id="divotravez">
         <span onclick='initGame();'>Otra vez</span>
-
     </div>
 
 </body>

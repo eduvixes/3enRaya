@@ -122,8 +122,8 @@ function pedirdatosjugadores(){
     $("#botonaceptar").on('click',validarjugadores);
 
     //debug para no pedir datos jugadores
-    //iniciardebug();
-    //$("#pedirjugadores").attr('style','display:none');
+        //iniciardebug();
+        //$("#pedirjugadores").attr('style','display:none');
     //debug
 
 }
@@ -137,6 +137,7 @@ function validarjugadores(){
     else{
         $("#datos").attr('style','display:none');
         obtenerdatosjugadores();
+        $("#muestra-jugadores").attr('style','display:block');
         Game();
     }
 
@@ -145,6 +146,7 @@ function validarjugadores(){
 function initGame(){  
 
     $("#datos").attr('style','display:none');
+    $("#muestra-jugadores").attr('style','display:none');
     $("#turno").attr('style','display:none');
     $("#contenedortablero").attr('style','display:none');
     $("#ganador").attr('style','display:none');

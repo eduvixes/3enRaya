@@ -1,14 +1,13 @@
 function mostrarjugador(nombre,signo){
 	$("#jugador").html(nombre);
-    $("#signo").html(signo);
+	ruta = './img/'+signo+'.png';
+    $("#signo").attr('src',ruta);
 }
 
 function mostrarjugadores(){
 
 	$("#jugador1").html(player1['nombrejugador']);
-	$("#signo-jugador1").html(player1['signo']);
 	$("#jugador2").html(player2['nombrejugador']);
-	$("#signo-jugador2").html(player2['signo']);
 
 }
 
@@ -39,12 +38,21 @@ function pintartablero(){
 
 }
 
-function mostrarganador(jugador, posiciones){
-	//pintar posiciones ganador
+function mostrarganador(){
+
 	$("#ganador").attr('style','display:block');
 	$("#nombreganador").html(turnojugador['nombrejugador']);
 	$("#divotravez").attr('style','display:block');
-	//alert(turnojugador['nombrejugador']);
+
+}
+
+function pintarganadora(posiciones){
+
+	for (let i=0;i<3;i++){
+		tablero[posiciones[i]]= 'ganador';
+		pintasigno(posiciones[i]);
+	}
+
 }
 
 function jugar(i){
@@ -59,7 +67,9 @@ function jugar(i){
 				cambiarturno();
 			}
 			else{
-				mostrarganador(turnojugador, res['posiciones']);
+				//pintar posiciones ganador
+				pintarganadora(res['posiciones']);
+				mostrarganador();
 			}
 		}
 		else{
@@ -77,7 +87,7 @@ function jugar(i){
 
 function pintasigno(i){
 
-	imagen = "<img id='imagen" + i +"' onclick='jugar("+i+");' class = 'contenidocelda' src='./img/" + tablero[i] + ".png'" +">";
+	imagen = "<img id='imagen" + i +"' class='celda' onclick='jugar("+i+");' src='./img/" + tablero[i] + ".png'" +">";
 
 	$("#"+i).html(imagen);
 
