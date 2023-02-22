@@ -18,7 +18,6 @@ let noplayer = {'nombrejugador':'', 'signo':''};
 let player1 = {'nombrejugador':'', 'signo':''};
 let player2 = {'nombrejugador':'', 'signo':''};
 let ganador = '';
-let sepuedecambiarturno = false;
 
 let turnojugador = noplayer;
 
@@ -35,6 +34,25 @@ function rellenarcombinaciones(){
 
 }
 
+function limpiardatos(){
+
+    tablero = [vacio,vacio,vacio,vacio,vacio,vacio,vacio,vacio,vacio];
+
+    $("#nombrejugador1").val('');
+    $("#nombrejugador2").val('');
+
+    $("#jugador").html('');
+    $("#signo").html('');
+
+    $("#jugador1").html('');
+    $("#signo-jugador1").html('');
+    $("#jugador2").html('');
+    $("#signo-jugador2").html('');
+
+    $("#nombreganador").html('');
+
+}
+
 function contarsitres(combinacion, signo){
     
     gano = contarfichas(combinacion, signo);
@@ -45,8 +63,6 @@ function contarsitres(combinacion, signo){
     else{
         respuesta = false;
     }
-
-    console.log(combinacion+'-'+gano+'-'+signo);
 
     return respuesta;
 }
@@ -87,8 +103,6 @@ function testsuccess(signo){
 
 }
 
-
-
 function iniciardebug(){
 
    //debug
@@ -96,24 +110,33 @@ function iniciardebug(){
     player1['signo'] = circle;
     player2['nombrejugador'] = 'lolo';
     player2['signo'] = cross;
-    mostrarjugador('jugador1', player1['nombrejugador'], player1['signo']);
-    mostrarjugador('jugador2', player2['nombrejugador'], player2['signo']);
+    mostrarjugadores();
     turnojugador =  player1;
-    
    //debug
    
 }
 
+function pedirdatosjugadores(){
 
+    $("#datos").attr('style','display:block');
+    $("#botonaceptar").on('click',validarjugadores);
+
+    //debug para no pedir datos jugadores
+    //iniciardebug();
+    //$("#pedirjugadores").attr('style','display:none');
+    //debug
+
+}
 
 function validarjugadores(){
-    if ( (player1['nombrejugador'] == '') 
-        || (player2['nombrejugador'] == '')) {
-        alert('faltan jugadores');
+
+    if ( ($("#nombrejugador1").val() == '') || ($("#nombrejugador2").val() == '') ) {
+        alert('faltan datos jugadores');
+        pedirdatosjugadores();
     }
     else{
-        $("#start-element").attr('style','display:none');
-        $("#pedirjugadores").attr('style','display:none');
+        $("#datos").attr('style','display:none');
+        obtenerdatosjugadores();
         Game();
     }
 
@@ -125,21 +148,15 @@ function initGame(){
     $("#turno").attr('style','display:none');
     $("#contenedortablero").attr('style','display:none');
     $("#ganador").attr('style','display:none');
-
-    //$("#pedirjugadores").attr('style','display:block');
-
-    //debug para no pedir datos jugadores
-    iniciardebug();
-    $("#pedirjugadores").attr('style','display:none');
-    //debug
-
-    $("#start-element").on('click',validarjugadores);
-
+    $("#divotravez").attr('style','display:none');
+    limpiardatos();
+    pedirdatosjugadores();
+    
 }
 
 function Game(){
 
-    pintarturno();
+    cambiarturno();
     pintartablero();
 
 }

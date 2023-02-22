@@ -1,11 +1,18 @@
 function mostrarjugador(nombre,signo){
-	$("#jugardor").html(nombre);
+	$("#jugador").html(nombre);
     $("#signo").html(signo);
 }
 
+function mostrarjugadores(){
+
+	$("#jugador1").html(player1['nombrejugador']);
+	$("#signo-jugador1").html(player1['signo']);
+	$("#jugador2").html(player2['nombrejugador']);
+	$("#signo-jugador2").html(player2['signo']);
+
+}
 
 function pintarturno(){
-
 
 	if (turnojugador == player1){
 		nombre = player1['nombrejugador'];
@@ -34,7 +41,10 @@ function pintartablero(){
 
 function mostrarganador(jugador, posiciones){
 	//pintar posiciones ganador
-	alert(turnojugador['nombrejugador']);
+	$("#ganador").attr('style','display:block');
+	$("#nombreganador").html(turnojugador['nombrejugador']);
+	$("#divotravez").attr('style','display:block');
+	//alert(turnojugador['nombrejugador']);
 }
 
 function jugar(i){
@@ -58,9 +68,6 @@ function jugar(i){
 			rellenarcombinaciones();
 		}
 	}
-
-
-
 }
 
 function pintasigno(i){

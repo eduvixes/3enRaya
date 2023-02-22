@@ -27,28 +27,14 @@
         Juega <span id="jugador"></span> con <span id="signo"> </span>
     </div>
 
-    <div id="start" class="bloque-pantalla">
-        <span id="start-element">empezar</span>
-    </div>
-
-    <div id="pedirjugadores" class="bloque-pantalla">
-        <spam id="pedirjugador1" onclick="pedirdatos1();">datos jugador 1</spam>
-        <span id="pedirjugador2" onclick="pedirdatos2();">datos jugador 2</span>
-    </div>
-
     <div id="datos" class="bloque-pantalla">
-        <div id="pedirdatos">
-            <div id="textopedir"></div>
-            <div id="dato">
-                <form id="formdatos">
-                    nombre
-                    <input id="valordato" type="text" name="dato">
-                    <p id="botonaceptar"">aceptar</p>
-                </form>
-            </div>
-            
-        </div>
+        <form id="formdatos">
+            Nombre Jugador 1: <input id="nombrejugador1" type="text" name="dato"><img class='signo' src='./img/circle.png'><br>
+            Nombre Jugador 2: <input id="nombrejugador2" type="text" name="dato"><img class='signo' src='./img/cross.png'><br>
+            <p id="botonaceptar">Aceptar</p>
+        </form>
     </div>
+    
     <div id="contenedortablero">
         <table id="tablero" border="1">
             <tbody id="cuerpotablero">
@@ -69,12 +55,16 @@
                 </tr>
             </tbody>
         </table>
-        <span id='cambiarturno' onclick='cambiarturno();'>cambiar</span>
     </div>
     <div id="ganador">
-        <div id="textoganador">el ganador</div>
-    </div>
+        El ganador es <spam id="nombreganador"></span><br>
+            <span id='otravez' onclick='initGame();'>Otra vez</span>
 
+    </div>
+    <div id="divotravez">
+        <span onclick='initGame();'>Otra vez</span>
+
+    </div>
 
 </body>
 
